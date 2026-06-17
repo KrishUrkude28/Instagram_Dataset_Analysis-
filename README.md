@@ -1,41 +1,308 @@
-# 📱 Instagram Data Analysis
+#  Instagram Data Analysis
 
-This repository contains a comprehensive analysis of Instagram engagement and follower activity across 7 relational tables. The project focuses on data cleaning, datetime parsing, calculating post-level engagement metrics, analyzing optimal posting times, evaluating filter effects, mapping hashtag ecosystems, and providing actionable growth strategies.
+A comprehensive social media analytics project exploring Instagram engagement patterns, audience behavior, content performance, and hashtag ecosystems using a relational database structure.
 
----
-
-## 📊 Dataset Description
-
-The analysis is performed on a relational database of Instagram interactions containing **7 tables**:
-
-* **photos** (257 rows): Post metadata, including image link, creator ID, creation datetime, filter usage, and content type (`photo`, `video`, `carousel`).
-* **users** (100 rows): Creator profiles, including username, join date, privacy setting, total post count, and verification status.
-* **likes** (8,782 rows): Post likes, including user ID, photo ID, timestamp, follower status, and reaction type (e.g., `clap`, `heart emoji`, `thumbs up`).
-* **comments** (7,488 rows): Comment text, commenter ID, target photo ID, creation timestamp, emoji usage, and hashtag counts in comments.
-* **follows** (7,623 rows): Follower relationships, including follower/followee IDs, follow date, and whether the follower profile is active or dormant.
-* **tags** (21 rows): Hashtag lookup table containing hashtag labels, creation timestamps, and geographic locations.
-* **photo_tags** (501 rows): Junction table linking photos to their respective hashtags.
+The project combines data cleaning, SQL-style relational analysis, engagement metric engineering, temporal analysis, and audience segmentation to uncover actionable insights for content creators, brands, and digital marketers seeking sustainable Instagram growth.
 
 ---
 
-## 🔍 Key Analytical Insights
+##  Dataset Overview
 
-### 1. Engagement & Content Type Performance
-* **The Static Image Advantage**: Raw photos achieve the highest average engagement (**63.63**) and the highest average engagement rate per follower (**83.38%**). Videos/Reels closely follow at **63.08** engagement, while carousel posts average **62.54**. 
-* **Filter Authenticity Effect**: Unfiltered posts marginally outperform filtered posts (**63.50** vs **63.15** average engagement). Keeping brand visuals authentic and raw is preferred by the audience over stylized filters.
+The analysis is based on a relational Instagram database containing **7 interconnected tables** representing users, posts, engagement interactions, follower relationships, and hashtag networks.
 
-### 2. Posting Schedule Optimization
-* **Peak Engagement Hours**: Engagement curves peak at **9:00 AM**, **12:00 PM**, and **7:00 PM**.
-* **Optimal Posting Days**: Mid-week and end-of-week posting yields the highest performance, with **Wednesday (72)** and **Friday (74)** leading. Weekends perform poorly, with **Sunday (55)** representing the lowest engagement period.
+### Database Schema
 
-### 3. Hashtag Discovery Ecosystem
-* **Organic Reach Potential**: **33.4%** of all post likes come from non-followers, illustrating a high organic discovery rate.
-* **Frequency vs. Impact**: Broad tags like `#smile` (59 uses) and `#beach` (42 uses) are the most frequent, but niche/contextual tags like `#delicious` (**65.27 avg. engagement**) and `#beauty` (**65.15 avg. engagement**) drive the highest quality interactions.
-
-### 4. Audience Health & Sentiment
-* **Follower Activity Rate**: Only **55.1%** of followers are currently active, meaning **44.9%** are dormant. A targeted re-engagement campaign can reactivate these accounts at zero cost.
-* **Emoji Engagement**: Over **50.0%** of comments include emojis. Interacting with emoji-based responses is critical for building a conversational brand community.
+| Table      | Records | Description                                                               |
+| ---------- | ------- | ------------------------------------------------------------------------- |
+| Photos     | 257     | Post metadata including content type, filters, creator, and creation time |
+| Users      | 100     | Creator profile information and account details                           |
+| Likes      | 8,782   | User likes and reaction activity                                          |
+| Comments   | 7,488   | Comment interactions and engagement data                                  |
+| Follows    | 7,623   | Follower-followee relationships                                           |
+| Tags       | 21      | Hashtag reference table                                                   |
+| Photo_Tags | 501     | Mapping table connecting photos and hashtags                              |
 
 ---
 
+##  Dataset Details
 
+### Photos Table
+
+Contains post-level information including:
+
+* Photo ID
+* Creator ID
+* Image URL
+* Content Type (`Photo`, `Video`, `Carousel`)
+* Applied Filters
+* Creation Timestamp
+
+### Users Table
+
+Stores creator profile attributes:
+
+* Username
+* Join Date
+* Verification Status
+* Privacy Settings
+* Total Posts
+
+### Likes Table
+
+Tracks user engagement activity:
+
+* User ID
+* Photo ID
+* Like Timestamp
+* Follower Status
+* Reaction Type
+
+Examples:
+
+* ❤️ Heart Emoji
+* 👏 Clap
+* 👍 Thumbs Up
+
+### Comments Table
+
+Captures audience interaction data:
+
+* Comment Text
+* Comment Timestamp
+* Emoji Usage
+* Hashtag Counts
+* Commenter ID
+
+### Follows Table
+
+Maintains follower network information:
+
+* Follower ID
+* Followee ID
+* Follow Date
+* Activity Status
+
+### Tags & Photo Tags
+
+Provide hashtag metadata and photo-hashtag relationships for hashtag ecosystem analysis.
+
+---
+
+##  Data Processing
+
+Several preprocessing operations were performed to prepare the dataset for analysis:
+
+### Data Cleaning
+
+* Removed duplicate records
+* Standardized datetime formats
+* Validated foreign-key relationships
+* Cleaned hashtag labels
+* Normalized reaction categories
+
+### Datetime Engineering
+
+Extracted temporal features including:
+
+* Hour of Posting
+* Day of Week
+* Month
+* Weekday vs Weekend Categories
+
+### Engagement Metrics
+
+Calculated custom engagement indicators:
+
+* Total Engagement
+* Engagement Rate
+* Likes per Follower
+* Comments per Follower
+* Non-Follower Engagement Rate
+
+---
+
+## 📈 Key Analytical Findings
+
+---
+
+## 1️⃣ Content Performance Analysis
+
+### The Static Image Advantage
+
+Content type comparison revealed that traditional image posts continue to outperform other formats.
+
+| Content Type | Average Engagement |
+| ------------ | ------------------ |
+| Photo        | **63.63**          |
+| Video/Reel   | 63.08              |
+| Carousel     | 62.54              |
+
+### Key Insight
+
+While videos and carousels remain competitive, standard image posts generate the highest overall engagement and engagement efficiency.
+
+---
+
+## 2️⃣ Filter Impact Analysis
+
+### Authenticity Outperforms Heavy Editing
+
+Comparison between filtered and unfiltered content revealed a slight advantage for natural imagery.
+
+| Category         | Average Engagement |
+| ---------------- | ------------------ |
+| Unfiltered Posts | **63.50**          |
+| Filtered Posts   | 63.15              |
+
+### Business Implication
+
+Audiences appear to respond more positively to authentic and natural-looking content compared to heavily stylized posts.
+
+---
+
+## 3️⃣ Posting Schedule Optimization
+
+### Peak Engagement Hours
+
+Analysis of hourly engagement patterns identified three major activity windows:
+
+| Time     | Performance |
+| -------- | ----------- |
+| 9:00 AM  | High        |
+| 12:00 PM | High        |
+| 7:00 PM  | Highest     |
+
+These periods represent optimal opportunities for maximizing audience visibility and interaction.
+
+### Best Posting Days
+
+| Day       | Average Engagement |
+| --------- | ------------------ |
+| Friday    | **74**             |
+| Wednesday | **72**             |
+| Sunday    | **55**             |
+
+### Key Insight
+
+Midweek and end-of-week content consistently outperforms weekend publishing.
+
+---
+
+## 4️⃣ Hashtag Ecosystem Analysis
+
+### Organic Discovery Potential
+
+A significant proportion of engagement originates from users who do not already follow the account.
+
+| Metric             | Value     |
+| ------------------ | --------- |
+| Non-Follower Likes | **33.4%** |
+
+This indicates strong hashtag-driven discovery and content reach beyond existing audiences.
+
+---
+
+### Most Frequently Used Hashtags
+
+| Hashtag | Uses |
+| ------- | ---- |
+| #smile  | 59   |
+| #beach  | 42   |
+
+While these hashtags are popular, frequency alone does not guarantee performance.
+
+---
+
+### Highest Performing Hashtags
+
+| Hashtag    | Average Engagement |
+| ---------- | ------------------ |
+| #delicious | **65.27**          |
+| #beauty    | **65.15**          |
+
+### Key Insight
+
+Niche and context-specific hashtags generate stronger engagement than broadly used tags.
+
+---
+
+## 5️⃣ Audience Health Analysis
+
+### Follower Activity Status
+
+| Category          | Percentage |
+| ----------------- | ---------- |
+| Active Followers  | **55.1%**  |
+| Dormant Followers | **44.9%**  |
+
+### Business Implication
+
+Nearly half of the audience is inactive, creating a substantial opportunity for re-engagement campaigns.
+
+Potential strategies:
+
+* Personalized content series
+* Story interactions
+* Polls and Q&A sessions
+* Giveaways and contests
+
+---
+
+## 6️ Comment Sentiment & Community Engagement
+
+### Emoji Usage Analysis
+
+More than half of all comments contained emoji interactions.
+
+| Metric               | Value      |
+| -------------------- | ---------- |
+| Emoji-Based Comments | **50.0%+** |
+
+### Key Insight
+
+Emoji reactions represent a major communication channel between creators and audiences.
+
+Actively responding to these interactions can strengthen community engagement and increase audience loyalty.
+
+---
+
+##  Strategic Recommendations
+
+### For Content Creators
+
+* Prioritize high-quality photo content.
+* Publish during peak engagement windows.
+* Use niche hashtags alongside broad hashtags.
+* Focus on authentic visuals rather than excessive filtering.
+* Engage actively with comment sections.
+
+### For Brands
+
+* Schedule campaigns on Wednesdays and Fridays.
+* Develop reactivation campaigns for dormant followers.
+* Leverage hashtag communities for organic reach.
+* Monitor engagement rate rather than follower count alone.
+
+### For Social Media Managers
+
+* Track non-follower engagement as a growth KPI.
+* Optimize posting schedules using audience activity patterns.
+* Build hashtag strategies around performance rather than popularity.
+
+---
+
+##  Technologies Used
+
+* SQL
+* Python
+* Pandas
+* NumPy
+* Matplotlib
+* Seaborn
+* Jupyter Notebook
+
+---
+
+##  Conclusion
+
+This analysis demonstrates that Instagram growth is driven by a combination of content quality, strategic timing, hashtag optimization, and audience engagement. While photos remain the strongest-performing content type, authentic visuals, niche hashtags, and active community management provide the greatest opportunities for sustainable audience growth and organic discovery.
